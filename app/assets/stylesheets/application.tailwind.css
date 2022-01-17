@@ -9,6 +9,7 @@
 
   .btn-primary {
     @apply bg-sky-500 text-white;
+    @apply hover:bg-indigo-400;
   }
 
   .btn-secondary {
