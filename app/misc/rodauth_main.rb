@@ -129,5 +129,18 @@ class RodauthMain < Rodauth::Rails::Auth
     # reset_password_deadline_interval Hash[hours: 6]
     # verify_login_change_deadline_interval Hash[days: 2]
     # remember_deadline_interval Hash[days: 30]
+
+    before_create_account do
+      # Validate presence of the name field
+      throw_error_status(422, "name", "must be present") unless param_or_nil("name")
+    end
+    after_create_account do
+      # Create the associated profile record with name
+      Profile.create!(account_id: account_id, name: param("name"))
+    end
+    after_close_account do
+      # Delete the associated profile record
+      Profile.find_by!(account_id: account_id).destroy
+    end
   end
 end
