@@ -67,13 +67,6 @@ ActiveRecord::Schema.define(version: 2022_01_18_124416) do
     t.index ["account_id"], name: "index_profiles_on_account_id"
   end
 
-  create_table "todos", force: :cascade do |t|
-    t.string "title"
-    t.boolean "completed"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   add_foreign_key "account_login_change_keys", "accounts", column: "id"
   add_foreign_key "account_password_hashes", "accounts", column: "id"
   add_foreign_key "account_password_reset_keys", "accounts", column: "id"
